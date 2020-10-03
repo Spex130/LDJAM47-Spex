@@ -112,9 +112,13 @@ public class PlayerScript : MonoBehaviour
 		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-			_animator.SetTrigger("Jump");
+			_animator.SetBool("Jump", true);
             _animator.ResetTrigger("Idle");
 		}
+        else
+        {
+            _animator.SetBool("Jump", false);
+        }
 
 
 		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
