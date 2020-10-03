@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MetalMaterial3
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: cd40fc52ef662c54a8c2e345f00c2589, type: 3}
+  m_ShaderKeywords: _ENABLEFRESNEL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -58,8 +58,13 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _DepthPower: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Emissive: 0
+    - _EnableAlpha: 0
+    - _EnableFresnel: 1
+    - _FresnelPower: 8
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -71,7 +76,9 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
+    - _UseTexture: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    - _Color: {r: 0.46666667, g: 0.6156863, b: 0.30588236, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 0.680845, g: 0.8679245, b: 0.47899607, a: 0.5}

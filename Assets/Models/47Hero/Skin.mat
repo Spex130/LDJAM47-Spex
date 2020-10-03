@@ -8,8 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Skin
-  m_Shader: {fileID: 4800000, guid: fa9f39bc1dc16c44093eb8ccf033e0dc, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 4800000, guid: cd40fc52ef662c54a8c2e345f00c2589, type: 3}
+  m_ShaderKeywords: _ENABLEFRESNEL_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -61,8 +61,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Emissive: 0
-    - _EnableFresnel: 0
-    - _FresnelPower: 1
+    - _EnableAlpha: 0
+    - _EnableFresnel: 1
+    - _FresnelPower: 2.11
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
@@ -77,6 +78,6 @@ Material:
     - _UseTexture: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8000001, g: 0.46229628, b: 0.20553514, a: 1}
+    - _Color: {r: 1, g: 0.66639775, b: 0.41037738, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _FresnelColor: {r: 1, g: 1, b: 1, a: 0.5}
+    - _FresnelColor: {r: 0.8301887, g: 0.54393023, b: 0.3250267, a: 0.5}

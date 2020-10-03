@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: MouthMat
   m_Shader: {fileID: 4800000, guid: fa9f39bc1dc16c44093eb8ccf033e0dc, type: 3}
-  m_ShaderKeywords: _USETEXTURE_ON
+  m_ShaderKeywords: _ENABLEALPHA_ON _USETEXTURE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -62,6 +62,7 @@ Material:
     - _DisableFresnel: 0
     - _DstBlend: 0
     - _Emissive: 1
+    - _EnableAlpha: 1
     - _EnableFresnel: 0
     - _FresnelPower: 1
     - _GlossMapScale: 1
