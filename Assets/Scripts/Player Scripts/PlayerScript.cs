@@ -79,7 +79,7 @@ public class PlayerScript : MonoBehaviour
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 			if( _controller.isGrounded )
-				_animator.SetTrigger("Run");
+				_animator.SetBool("Run", true);
 		}
 		else if( Input.GetKey( KeyCode.LeftArrow ) )
 		{
@@ -88,15 +88,17 @@ public class PlayerScript : MonoBehaviour
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 
 			if( _controller.isGrounded )
-				_animator.SetTrigger("Run");
+				_animator.SetBool("Run", true);
 		}
 		else
 		{
+            _animator.SetBool("Run", false);
 			normalizedHorizontalSpeed = 0;
 
 			if( _controller.isGrounded )
             {
                 _animator.ResetTrigger("GroundSlash");
+                _animator.ResetTrigger("GroundShot");
                 //_animator.ResetTrigger("AirSlash");
 				_animator.SetBool("Idle", true);
             }
@@ -146,6 +148,14 @@ public class PlayerScript : MonoBehaviour
             if(_controller.isGrounded)
             {
                 _animator.SetTrigger("GroundSlash");
+            }
+            
+        }
+        if(Input.GetKeyUp( KeyCode.X ))
+        {
+            if(_controller.isGrounded)
+            {
+                _animator.SetTrigger("GroundShot");
             }
             
         }
