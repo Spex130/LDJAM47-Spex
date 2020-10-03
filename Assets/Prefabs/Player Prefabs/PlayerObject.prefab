@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7481733443173116160}
   - component: {fileID: 7481733443173116162}
   - component: {fileID: 7481733443173116164}
-  - component: {fileID: 7481733443173116167}
+  - component: {fileID: 2670081763762459695}
   - component: {fileID: 7481733443173116166}
   - component: {fileID: 7481733443173116169}
   m_Layer: 8
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   totalHorizontalRays: 5
   totalVerticalRays: 3
---- !u!114 &7481733443173116167
+--- !u!114 &2670081763762459695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,14 +124,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7481733443173116168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50effa1f968e34abca1c48e9ebeba4f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 34683d84063a68e41b8ac4f9939ab241, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: -25
-  runSpeed: 6
-  groundDamping: 20
-  inAirDamping: 5
-  jumpHeight: 3
+  gravity: -80
+  runSpeed: 12
+  groundDamping: 100
+  inAirDamping: 20
+  jumpHeight: 6
 --- !u!61 &7481733443173116166
 BoxCollider2D:
   m_ObjectHideFlags: 0
