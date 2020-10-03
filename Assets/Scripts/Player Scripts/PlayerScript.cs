@@ -95,9 +95,15 @@ public class PlayerScript : MonoBehaviour
 			normalizedHorizontalSpeed = 0;
 
 			if( _controller.isGrounded )
+            {
                 _animator.ResetTrigger("GroundSlash");
                 //_animator.ResetTrigger("AirSlash");
-				_animator.SetTrigger("Idle");
+				_animator.SetBool("Idle", true);
+            }
+            else
+            {
+                _animator.SetBool("Idle", false);
+            }
                 
 		}
 
