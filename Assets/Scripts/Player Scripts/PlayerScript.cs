@@ -19,8 +19,15 @@ public class PlayerScript : MonoBehaviour
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
 
+    [Header("Drag References")]
 	private CharacterController2D _controller;
 	public Animator _animator;
+
+    [Tooltip("The Hitbox Prefab used to instantiate stuff.")]
+    public PlayerHitbox playerHitboxPrefab;
+
+
+    //Private Stuff
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
 
@@ -68,6 +75,20 @@ public class PlayerScript : MonoBehaviour
         hasPlayerSpawned = true;
     }
 
+    public void createHitbox(int damageIn)
+    {
+        GameObject.Instantiate<PlayerHitbox>(playerHitboxPrefab, this.transform.position + new Vector3(2,2,0), Quaternion.identity);
+    }
+
+    public void createHitbox(int damageIn, float xOffset, float yOffset)
+    {
+        GameObject.Instantiate<PlayerHitbox>(playerHitboxPrefab, this.transform.position + new Vector3(xOffset * getPlayerDirection(), yOffset, 0), Quaternion.identity);
+    }
+
+    public int getPlayerDirection()
+    {
+        return transform.localScale.x > 0 ? 1 : -1;
+    }
 
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
@@ -159,9 +180,11 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundSlash");
+                    createHitbox(2, 5, 4);
                 }
                 
             }
+
             if(Input.GetKeyUp( KeyCode.X ))
             {
                 if(_controller.isGrounded)
