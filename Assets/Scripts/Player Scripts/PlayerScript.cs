@@ -5,10 +5,10 @@ using Prime31;
 
 public class PlayerScript : MonoBehaviour
 {
-    //Must be set to true before we can interact with the game.
+    // Must be set to true before we can interact with the game
     public bool hasPlayerSpawned = false;
 
-	// movement config
+	// Movement config
 	public float gravity = -25f;
 	public float runSpeed = 8f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
@@ -24,14 +24,14 @@ public class PlayerScript : MonoBehaviour
 	public Animator _animator;
 
     [Tooltip("The Hitbox Prefab used to instantiate stuff.")]
-    public PlayerHitbox playerHitboxPrefab;
+    public PlayerHitbox playerSlashPrefab;
+    public PlayerHitbox playerShootPrefab;
 
-
-    //Private Stuff
+    // Private Stuff
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
 
-
+    // Called when the object is instantiated
     void Awake()
     {
         _animator = _animator == null ? _animator = _animator : _animator = GetComponentInChildren<Animator>();
@@ -42,7 +42,6 @@ public class PlayerScript : MonoBehaviour
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
         _controller.onTriggerExitEvent += onTriggerExitEvent;
     }
-
 
     #region Event Listeners
 
@@ -55,7 +54,6 @@ public class PlayerScript : MonoBehaviour
         // logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
         //Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
     }
-
 
     void onTriggerEnterEvent( Collider2D col )
     {
@@ -70,26 +68,17 @@ public class PlayerScript : MonoBehaviour
 
     #endregion
 
+    // Sets the player spawn flag
     public void markPlayerSpawned()
     {
         hasPlayerSpawned = true;
     }
 
-    public void createHitbox(int damageIn)
-    {
-        GameObject.Instantiate<PlayerHitbox>(playerHitboxPrefab, this.transform.position + new Vector3(2,2,0), Quaternion.identity);
-    }
-
-    public void createHitbox(int damageIn, float xOffset, float yOffset)
-    {
-        GameObject.Instantiate<PlayerHitbox>(playerHitboxPrefab, this.transform.position + new Vector3(xOffset * getPlayerDirection(), yOffset, 0), Quaternion.identity);
-    }
-
+    // Returns the direction of the player
     public int getPlayerDirection()
     {
         return transform.localScale.x > 0 ? 1 : -1;
     }
-
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
@@ -138,7 +127,6 @@ public class PlayerScript : MonoBehaviour
                 {
                     _animator.SetBool("Idle", false);
                 }
-                    
             }
 
 
@@ -188,9 +176,8 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundSlash");
-                    createHitbox(2, 5, 4);
+                    attack(playerSlashPrefab, 2, 5, 4);
                 }
-                
             }
 
             if(Input.GetKeyUp( KeyCode.X ))
@@ -198,10 +185,22 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundShot");
+                    attack(playerShootPrefab, 2, 5, 4);
                 }
-                
             }
         }
     }
 
+    public void attack( PlayerHitbox prefab, int damage )
+    {
+        attack( prefab, damage, 2, 2 );
+    }
+
+    public void attack( PlayerHitbox prefab, int damage, float xOffset, float yOffset )
+    {
+        Vector3 spawnPos = this.transform.position + new Vector3( xOffset * getPlayerDirection(), yOffset, 0 );
+        
+        PlayerHitbox hitbox = GameObject.Instantiate<PlayerHitbox>( prefab, spawnPos, Quaternion.identity);
+        hitbox.setDirection( getPlayerDirection() );
+    }
 }

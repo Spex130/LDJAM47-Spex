@@ -2,44 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHitbox : MonoBehaviour
+public class PlayerHitbox : Hitbox
 {
+    public GameObject originObject;
 
-    public int damageValue = 1;
+    private BasicEnemyScript enemy;
 
-    public float Timer = 1f;
-
-    // Start is called before the first frame update
+    // Called before the first frame update
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody2D>();
+
+        rigidbody.velocity = new Vector3( speed * direction, 0, 0 );
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // Called when another collider enters the hitbox
+    void OnTriggerEnter2D( Collider2D otherCollider )
     {
-        Timer-= Time.deltaTime;
-        if(Timer <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-    }
+        Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
 
-    void OnTriggerEnter2D( Collider2D col )
-	{
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
-        BasicEnemyScript enemy = col.GetComponent<BasicEnemyScript>();
-        if(enemy != null)
+        // Grab the enemy script
+        enemy = otherCollider.GetComponent<BasicEnemyScript>();
+
+        if( enemy != null )
         {
+            // Call the enemy's damage method
             enemy.TakeDamage(damageValue);
-            Destroy(this.gameObject);
         }
-	}
 
-
-	void OnTriggerExit2D( Collider2D col )
-	{
-		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
-	}
-
+        // Destroy the object after hitting a collider
+        Destroy(this.gameObject);
+    }
 }

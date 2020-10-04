@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 9053540036457814687}
   - component: {fileID: 9053540036457814684}
   - component: {fileID: 9053540036457814685}
+  - component: {fileID: 6220968636379458827}
   m_Layer: 9
-  m_Name: PlayerHitbox
+  m_Name: PlayerSlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,4 +121,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageValue: 1
-  Timer: 1
+  timer: 1
+  speed: 0
+  rigidbody: {fileID: 0}
+  originObject: {fileID: 7481733443173116168, guid: 7e835628950627049bf0667eedec7330,
+    type: 3}
+--- !u!50 &6220968636379458827
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9053540036457814690}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

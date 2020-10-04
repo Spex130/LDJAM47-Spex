@@ -164,7 +164,10 @@ MonoBehaviour:
   inAirDamping: 20
   jumpHeight: 6
   _animator: {fileID: 1646206751867212233}
-  playerHitboxPrefab: {fileID: 0}
+  playerSlashPrefab: {fileID: 9053540036457814685, guid: 76d5123f96702f94ead4997bdb0e4ec3,
+    type: 3}
+  playerShootPrefab: {fileID: 7073777560673884516, guid: f6bfb2bec7adcc041881df890e65802a,
+    type: 3}
 --- !u!61 &7481733443173116166
 BoxCollider2D:
   m_ObjectHideFlags: 0
