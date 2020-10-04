@@ -3,7 +3,27 @@ guid: c61240247272b4e40841721ab6298995
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoboMetal
+    second: {fileID: 2100000, guid: b80d75e7b89a30c4793379cef27c3b49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoboMetal2
+    second: {fileID: 2100000, guid: 749dee8d0eb3eda4a85cdf33c41e3485, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TireBlack
+    second: {fileID: 2100000, guid: 2eda340620667394381913704dca10bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window
+    second: {fileID: 2100000, guid: 84c164f67aab6ce4c95c3bd7c53d21fe, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -15,7 +35,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -23,7 +44,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -73,7 +94,152 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: 47_Mook(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cube
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 3.42106, z: -0.2231414}
+      rotation: {x: 0.9077721, y: -5.4213113e-17, z: 5.4213106e-17, w: -0.41946372}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 3.4228444, z: -0.24673551}
+      rotation: {x: -0.83923477, y: 3.2803257e-17, z: -3.2803247e-17, w: 0.54376924}
+      scale: {x: 100, y: 100.00001, z: 100.00001}
+    - name: Cube.001
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 6.131415, z: -0.1590723}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Sphere
+      parentName: 47_Mook(Clone)
+      position: {x: -1.1148739e-15, y: 6.000794, z: 0.80866474}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder.001
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 6.035612, z: -0.24673551}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cube.002
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 2.3316052, z: -1.8667898}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cube.003
+      parentName: 47_Mook(Clone)
+      position: {x: -1.1603734e-15, y: 5.2258573, z: -2.8742208}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder.002
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Armature
+      parentName: 47_Mook(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: mookOrigin
+      parentName: Armature
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookRotator
+      parentName: mookOrigin
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookHips
+      parentName: mookRotator
+      position: {x: -0, y: 0.020345246, z: 0}
+      rotation: {x: 0.36950824, y: -0.000000110772596, z: -0.000000044048832, w: 0.9292275}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: mookLeg.L
+      parentName: mookHips
+      position: {x: 5.0251272e-17, y: 0.007072238, z: -8.9406965e-10}
+      rotation: {x: -0.20280021, y: 0.3462319, z: 0.9148518, w: 0.04518701}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: mookLeg.L.001
+      parentName: mookLeg.L
+      position: {x: 0.0000000017485581, y: 0.02088809, z: 3.72529e-10}
+      rotation: {x: 0.13026674, y: -0.12274477, z: -0.49873114, w: 0.8480753}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: mookLeg.L.001_end
+      parentName: mookLeg.L.001
+      position: {x: -0, y: 0.040342644, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookUpperChassis
+      parentName: mookHips
+      position: {x: 5.0251272e-17, y: 0.007072238, z: -8.9406965e-10}
+      rotation: {x: 0.9242782, y: -2.5141408e-14, z: -0.00000022036515, w: -0.38171953}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookCannonBase.L
+      parentName: mookUpperChassis
+      position: {x: 7.8501574e-18, y: 0.008296212, z: 0.0000000024866311}
+      rotation: {x: 0.28803027, y: 0.000000015079669, z: 0.6505528, w: 0.7027231}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookCannon.L
+      parentName: mookCannonBase.L
+      position: {x: 0.000000001490116, y: 0.030802306, z: -0.0000000031292438}
+      rotation: {x: 0.26811117, y: 0.0000000045694324, z: 0.6543061, w: 0.70710677}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookCannon.L_end
+      parentName: mookCannon.L
+      position: {x: -0, y: 0.03922038, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookCannonBase.R
+      parentName: mookUpperChassis
+      position: {x: 7.737714e-18, y: 0.008296212, z: 0.0000000024866311}
+      rotation: {x: 0.28803003, y: 0.00000015033774, z: -0.6505528, w: 0.7027231}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: mookCannon.R
+      parentName: mookCannonBase.R
+      position: {x: -0, y: 0.030802304, z: -0.0000000052154063}
+      rotation: {x: 0.2681111, y: 0.0000000507035, z: -0.6543061, w: 0.70710677}
+      scale: {x: 0.9999999, y: 1, z: 0.9999999}
+    - name: mookCannon.R_end
+      parentName: mookCannon.R
+      position: {x: -0, y: 0.03922038, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookBackLeg
+      parentName: mookUpperChassis
+      position: {x: 7.8501574e-18, y: 0.008296212, z: 0.0000000024866311}
+      rotation: {x: -0.23781238, y: -3.8400937e-15, z: 0.000000056698887, w: 0.9713111}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
+    - name: mookBackLeg.001
+      parentName: mookBackLeg
+      position: {x: -6.7645004e-17, y: 0.0209443, z: 0.0000000011920929}
+      rotation: {x: -0.1653067, y: -4.741888e-15, z: 0.00000003941219, w: 0.98624223}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: mookBackLeg.001_end
+      parentName: mookBackLeg.001
+      position: {x: -0, y: 0.031014184, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mookLeg.R
+      parentName: mookHips
+      position: {x: 5.0251272e-17, y: 0.007072238, z: -8.9406965e-10}
+      rotation: {x: -0.33139855, y: -0.36371434, z: -0.705708, w: 0.5097677}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: mookLeg.R.001
+      parentName: mookLeg.R
+      position: {x: -0.0000000019324944, y: 0.02088809, z: 1.4901161e-10}
+      rotation: {x: 0.025905043, y: 0.1856482, z: 0.11089176, w: 0.97599524}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: mookLeg.R.001_end
+      parentName: mookLeg.R.001
+      position: {x: -0, y: 0.040342644, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -82,15 +248,15 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: mookOrigin
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
