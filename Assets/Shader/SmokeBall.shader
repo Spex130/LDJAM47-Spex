@@ -77,14 +77,14 @@
 			o.Albedo = saturate(col.rgb * col2.r + col2.r + fresnel);
 			o.Albedo *= _Color;
 
-			float alphaValue = _IsParticleMaterial > 0 ? 1- i.color.r - .2 : _AlphaDissolve;
+			float alphaValue = _IsParticleMaterial > 0 ? 1- i.color.r - .2 : _AlphaDissolve * i.color.rgb;
 
 			clip(col2.r - alphaValue);
 
 			//combine the fresnel value with a color
 			float3 fresnelColor = fresnel * _FresnelColor;
 			//apply the fresnel value to the emission
-			o.Emission = (_Emission + fresnelColor) * alphaValue;
+			o.Emission = (_Emission + fresnelColor) * (1-alphaValue);
 			o.Alpha = 1- alphaValue;
 		}
 		ENDCG

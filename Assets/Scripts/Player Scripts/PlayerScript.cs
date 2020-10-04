@@ -194,6 +194,10 @@ public class PlayerScript : MonoBehaviour
                     _animator.SetTrigger("GroundSlash");
                     Attack(playerSlashPrefab, 2);
                 }
+                else{
+                    _animator.SetTrigger("AirSlash");
+                    Attack(playerSlashPrefab, 2);
+                }
             }
 
             // Allows the player to ranged attack
@@ -202,6 +206,11 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundShot");
+                    Attack(playerShootPrefab, 2);
+                }
+                else
+                {
+                    _animator.SetTrigger("AirShot");
                     Attack(playerShootPrefab, 2);
                 }
             }
