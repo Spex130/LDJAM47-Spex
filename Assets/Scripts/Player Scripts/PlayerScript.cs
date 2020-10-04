@@ -5,16 +5,6 @@ using Prime31;
 
 public class PlayerScript : MonoBehaviour
 {
-<<<<<<< HEAD
-    // movement config
-    public float gravity = -25f;
-    public float runSpeed = 8f;
-    public float groundDamping = 20f; // how fast do we change direction? higher means faster
-    public float inAirDamping = 5f;
-    public float jumpHeight = 3f;
-    private bool isJumping = false;
-=======
-
     //Must be set to true before we can interact with the game.
     public bool hasPlayerSpawned = false;
 
@@ -24,17 +14,10 @@ public class PlayerScript : MonoBehaviour
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
->>>>>>> b870cbccb266191707519539569ccee8f2cf3727
 
     [HideInInspector]
     private float normalizedHorizontalSpeed = 0;
 
-<<<<<<< HEAD
-    private CharacterController2D _controller;
-    public Animator _animator;
-    private RaycastHit2D _lastControllerColliderHit;
-    private Vector3 _velocity;
-=======
     [Header("Drag References")]
 	private CharacterController2D _controller;
 	public Animator _animator;
@@ -46,7 +29,6 @@ public class PlayerScript : MonoBehaviour
     //Private Stuff
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
->>>>>>> b870cbccb266191707519539569ccee8f2cf3727
 
 
     void Awake()
