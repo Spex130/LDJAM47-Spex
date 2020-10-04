@@ -11,6 +11,7 @@ public class PlayerVFXTrigger : MonoBehaviour
     public ParticleSystem SmokeSystem;
     public ParticleSystem SlashSystem;
     public ParticleSystem ShineSystem;
+    public ParticleSystem ShotSystem;
 
     public void spawnSmokeParticle()
     {
@@ -27,9 +28,14 @@ public class PlayerVFXTrigger : MonoBehaviour
         ShineSystem.Play();
     }
 
+    public void spawnShotParticle()
+    {
+        ShotSystem.Play();
+    }
+
     public void markPlayerSpawned()
     {
         Player.markPlayerSpawned();
     }
-
+    
 }
