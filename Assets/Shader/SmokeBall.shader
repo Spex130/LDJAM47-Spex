@@ -19,6 +19,7 @@
 
         Tags { "Queue"="Transparent" "RenderType"="Transparent" "DisableBatching"="True" }
         Blend SrcAlpha OneMinusSrcAlpha 
+		ZWrite Off
 
 		CGPROGRAM
 
