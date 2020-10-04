@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
+    private bool isJumping = false;
 
     [HideInInspector]
     private float normalizedHorizontalSpeed = 0;
@@ -147,18 +148,19 @@ public class PlayerScript : MonoBehaviour
                 _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
                 _animator.SetBool("Jump", true);
                 _animator.ResetTrigger("Idle");
+                isJumping = true;
             }
             else
             {
                 _animator.SetBool("Jump", false);
             }
 
-        // Immediately start falling if jump key is released early
-        if( Input.GetKeyUp( KeyCode.UpArrow ) && isJumping )
-        {
-            _velocity.y = 0;
-            isJumping = false;
-        }
+            // Immediately start falling if jump key is released early
+            if( Input.GetKeyUp( KeyCode.UpArrow ) && isJumping )
+            {
+                _velocity.y = 0;
+                isJumping = false;
+            }
 
 
             // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
