@@ -21,8 +21,8 @@ public class BasicEnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // If time has expired, attack
-        timer-= Time.deltaTime;
+        // Attack based on timer
+        timer -= Time.deltaTime;
         if( timer <= 0 )
         {
             Attack( enemyShootPrefab, 2, 2, 0 );
@@ -33,7 +33,7 @@ public class BasicEnemyScript : MonoBehaviour
     // Called when another collider enters the hitbox
     void OnTriggerEnter2D( Collider2D otherCollider )
     {
-        Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
+        // Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
 
         // Grab the health script of the "enemy"
         enemy = otherCollider.GetComponent<HealthScript>();
@@ -45,18 +45,45 @@ public class BasicEnemyScript : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D( Collider2D col )
+    // Called when another collider enters the hitbox
+    void OnTriggerStay2D( Collider2D otherCollider )
     {
-        Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
+        // Debug.Log( "onTriggerStayEvent: " + otherCollider.gameObject.name );
+
+        // Grab the health script of the "enemy"
+        enemy = otherCollider.GetComponent<HealthScript>();
+
+        if( enemy != null )
+        {
+            // Call the enemy's damage method
+            enemy.TakeDamage( damage, transform.position );
+        }
     }
 
+    // Gets the position of the object
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
+    // Gets the direction of the object
+    public Vector3 GetDirection()
+    {
+        int xDir = transform.localScale.x > 0 ? 1 : -1;
+
+        return new Vector3( xDir, 0, 0 );
+    }
+
+    // Attack method
     public void Attack( Hitbox prefab, int damage, float xOffset, float yOffset )
     {
+        // Set hitbox position
         Vector3 xOffsetVector = new Vector3( xOffset , 0, 0 );
         Vector3 yOffsetVector = new Vector3( 0 , yOffset, 0 );
-        Vector3 spawnPos = this.transform.position + xOffsetVector + yOffsetVector;
-        
+        Vector3 spawnPos = this.transform.position + ( GetDirection().x * xOffsetVector ) + yOffsetVector;
+        // Create new hitbox object
         Hitbox hitbox = GameObject.Instantiate<Hitbox>( prefab, spawnPos, Quaternion.identity );
-        hitbox.SetDirection( Vector3.right );
+        // Set hitbox direction
+        hitbox.SetDirection( GetDirection() );
     }
 }

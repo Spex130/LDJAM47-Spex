@@ -214,6 +214,9 @@ MonoBehaviour:
   inAirDamping: 20
   jumpHeight: 10
   jumpRecoil: 100
+  kbRecoil: 3
+  kbHeight: 5
+  kbDuration: 0.5
   detectDistance: 2
   platformMask:
     serializedVersion: 2
@@ -236,10 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  kbEnabled: 1
-  kbHeight: 30
-  kbRecoil: 5
-  kbTimer: 0.5
+  invTimer: 2
 --- !u!1001 &3994091978111563269
 PrefabInstance:
   m_ObjectHideFlags: 0

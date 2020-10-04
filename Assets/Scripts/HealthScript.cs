@@ -4,47 +4,25 @@ using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
-    public int health = 2;
-    public bool kbEnabled = false;
-    public float kbHeight = 10f;
-    public float kbRecoil = 100f;
-    public float kbTimer = 1f;
-    private float timer = 0;
-    private bool isHit = false;
+    // Object public properties
+    public int health = 10;
+    public float invTimer = 0;
 
-    private Rigidbody2D rb;
+    // Object private properties
+    private PlayerScript player;
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<PlayerScript>();
     }
 
     // Called every frame
 	void Update()
     {
-        if( isHit )
-        {
-            timer += Time.deltaTime;
-        }
-        // If time has expired
-        if( timer >= kbTimer )
-        {
-            Debug.Log("hi");
-            // Stop the forces
-            rb.velocity = Vector2.zero;
-            // Reset the timer
-            timer = 0;
-            isHit = false;
-        }
-    }
-
-    // Returns the direction of the object
-    public Vector3 GetDirection()
-    {
-        int xDir = transform.localScale.x > 0 ? 1 : -1;
-
-        return new Vector3( xDir, 0, 0 );
+        // Update timer
+        timer += Time.deltaTime;
     }
 
     // Default constructor for taking damage
@@ -56,15 +34,17 @@ public class HealthScript : MonoBehaviour
     // Basic constructor for taking damage
     public void TakeDamage( int damage, Vector3 hitboxPos )
     {
-        health -= damage;
-        if( kbEnabled )
+        if( timer >= invTimer )
         {
-            float xComp = ( transform.position.x - hitboxPos.x ) * kbRecoil;
-            float yComp = kbHeight;
-            rb.velocity = new Vector2( xComp, yComp );
-            isHit = true;
+            // Decrement health
+            health -= damage;
+
+            // Check if object should exist
+            DeathCheck();
+
+            // Reset timer
+            timer = 0;
         }
-        DeathCheck();
     }
 
     // Checks if the character has enough health
@@ -76,6 +56,7 @@ public class HealthScript : MonoBehaviour
         }
     }
 
+    // Executes death function
     public void Die()
     {
         Destroy( this.gameObject );
