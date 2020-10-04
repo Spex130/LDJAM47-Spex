@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9067012004447739978}
   - component: {fileID: -1817029442173210454}
   - component: {fileID: -2176016844031608075}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: PlayerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &-2176016844031608075
 MonoBehaviour:

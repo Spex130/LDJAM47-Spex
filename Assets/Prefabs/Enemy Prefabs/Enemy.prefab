@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2760494815197006730}
   - component: {fileID: -7063522023693119352}
   - component: {fileID: 2760494815197006732}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c61240247272b4e40841721ab6298995,
         type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8416272007918961125, guid: c61240247272b4e40841721ab6298995,
         type: 3}
