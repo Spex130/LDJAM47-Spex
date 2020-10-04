@@ -133,6 +133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DemoFloorPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 111001340986859194, guid: 3655466bf9f18374a81b93b3cc787028,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 111001340986859198, guid: 3655466bf9f18374a81b93b3cc787028,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,6 +197,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 26.149
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686058946414814752, guid: 3655466bf9f18374a81b93b3cc787028,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3655466bf9f18374a81b93b3cc787028, type: 3}
@@ -294,6 +304,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2670081763762459695, guid: 7e835628950627049bf0667eedec7330,
+        type: 3}
+      propertyPath: hasPlayerSpawned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7481733443173116160, guid: 7e835628950627049bf0667eedec7330,
         type: 3}
       propertyPath: m_LocalPosition.x
