@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 9053540036457814690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.46, y: 0.1400001, z: 1.9639}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -123,6 +123,7 @@ MonoBehaviour:
   damageValue: 1
   timer: 1
   speed: 0
+  direction: {x: 0, y: 0, z: 0}
   rigidbody: {fileID: 0}
   originObject: {fileID: 7481733443173116168, guid: 7e835628950627049bf0667eedec7330,
     type: 3}

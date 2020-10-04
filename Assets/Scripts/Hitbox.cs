@@ -7,7 +7,7 @@ public class Hitbox : MonoBehaviour
     public int damageValue = 1;
     public float timer = 1f;
     public float speed = 0;
-    public int direction = 1;
+    public Vector3 direction;
 
     [HideInInspector]
     public Rigidbody2D rigidbody;
@@ -15,7 +15,7 @@ public class Hitbox : MonoBehaviour
     // Called before the first frame update
     void Start()
     {
-        
+        direction = Vector3.right;
     }
 
     // Called once per frame
@@ -41,7 +41,7 @@ public class Hitbox : MonoBehaviour
         Debug.Log( "onTriggerExitEvent: " + otherCollider.gameObject.name );
     }
 
-    public void setDirection( int newDirection )
+    public void setDirection( Vector3 newDirection )
     {
         direction = newDirection;
     }

@@ -13,7 +13,7 @@ public class PlayerHitbox : Hitbox
     {
         rigidbody = GetComponent<Rigidbody2D>();
 
-        rigidbody.velocity = new Vector3( speed * direction, 0, 0 );
+        rigidbody.velocity = speed * direction;
     }
 
     // Called when another collider enters the hitbox

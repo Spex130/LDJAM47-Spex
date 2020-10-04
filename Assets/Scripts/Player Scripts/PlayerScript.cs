@@ -13,7 +13,10 @@ public class PlayerScript : MonoBehaviour
 	public float runSpeed = 8f;
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
-	public float jumpHeight = 3f;
+	public float jumpHeight = 10f;
+    public float jumpRecoil = 100f;
+    public float detectDistance = 2f;
+    public int detectMask = 0;
     private bool isJumping = false;
 
     [HideInInspector]
@@ -52,7 +55,7 @@ public class PlayerScript : MonoBehaviour
             return;
 
         // logs any collider hits if uncommented. it gets noisy so it is commented out for the demo
-        //Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
+        // Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
     }
 
     void onTriggerEnterEvent( Collider2D col )
@@ -75,24 +78,29 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Returns the direction of the player
-    public int getPlayerDirection()
+    public Vector3 getPlayerDirection()
     {
-        return transform.localScale.x > 0 ? 1 : -1;
+        int xDir = transform.localScale.x > 0 ? 1 : -1;
+
+        return new Vector3( xDir, 0, 0 );
     }
 
-	// the Update loop contains a very simple example of moving the character around and controlling the animation
+	// Called every frame
+    // Contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
-        if(hasPlayerSpawned)
+        if( hasPlayerSpawned )
         {
             AnimatorStateInfo animInfo = _animator.GetCurrentAnimatorStateInfo(0);
             float currentAnimFrame = animInfo.normalizedTime % 1;
             _animator.SetFloat("CurrentAnimFrame", currentAnimFrame);
             _animator.SetFloat("VertVelocity", _controller.velocity.y);
 
+            // If the player is grounded, keep the height velocity at 0
             if( _controller.isGrounded )
                 _velocity.y = 0;
 
+            // Moves the player right
             if( Input.GetKey( KeyCode.RightArrow ) )
             {
                 normalizedHorizontalSpeed = 1;
@@ -102,6 +110,7 @@ public class PlayerScript : MonoBehaviour
                 if( _controller.isGrounded )
                     _animator.SetBool("Run", true);
             }
+            // Moves the player left
             else if( Input.GetKey( KeyCode.LeftArrow ) )
             {
                 normalizedHorizontalSpeed = -1;
@@ -111,6 +120,7 @@ public class PlayerScript : MonoBehaviour
                 if( _controller.isGrounded )
                     _animator.SetBool("Run", true);
             }
+            // Makes the player idle
             else
             {
                 _animator.SetBool("Run", false);
@@ -129,10 +139,20 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
+            // Debug.DrawRay(transform.position, getPlayerDirection() * detectDistance, Color.red);
 
-            // we can only jump whilst grounded
+            // Allows player jump on the ground
             if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
             {
+                _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
+                _animator.SetBool("Jump", true);
+                _animator.ResetTrigger("Idle");
+                isJumping = true;
+            }
+            // Allows player to wall jump
+            else if( Physics2D.Raycast( transform.position + Vector3.up, getPlayerDirection(), detectDistance, 1 << detectMask ) && Input.GetKeyDown( KeyCode.UpArrow ) )
+            {
+                _velocity.x = getPlayerDirection().x * -jumpRecoil;
                 _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
                 _animator.SetBool("Jump", true);
                 _animator.ResetTrigger("Idle");
@@ -176,7 +196,7 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundSlash");
-                    attack(playerSlashPrefab, 2, 5, 4);
+                    attack(playerSlashPrefab, 2);
                 }
             }
 
@@ -185,20 +205,24 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundShot");
-                    attack(playerShootPrefab, 2, 5, 4);
+                    attack(playerShootPrefab, 2);
                 }
             }
         }
     }
 
+    // Default constructor for attack
     public void attack( PlayerHitbox prefab, int damage )
     {
-        attack( prefab, damage, 2, 2 );
+        attack( prefab, damage, 5, 4 );
     }
 
+    // Basic constructor for attack
     public void attack( PlayerHitbox prefab, int damage, float xOffset, float yOffset )
     {
-        Vector3 spawnPos = this.transform.position + new Vector3( xOffset * getPlayerDirection(), yOffset, 0 );
+        Vector3 xOffsetVector = new Vector3( xOffset , 0, 0 );
+        Vector3 yOffsetVector = new Vector3( 0 , yOffset, 0 );
+        Vector3 spawnPos = this.transform.position + ( getPlayerDirection().x * xOffsetVector ) + yOffsetVector;
         
         PlayerHitbox hitbox = GameObject.Instantiate<PlayerHitbox>( prefab, spawnPos, Quaternion.identity);
         hitbox.setDirection( getPlayerDirection() );

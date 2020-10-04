@@ -162,7 +162,10 @@ MonoBehaviour:
   runSpeed: 20
   groundDamping: 100
   inAirDamping: 20
-  jumpHeight: 6
+  jumpHeight: 10
+  jumpRecoil: 100
+  detectDistance: 2
+  detectMask: 0
   _animator: {fileID: 1646206751867212233}
   playerSlashPrefab: {fileID: 9053540036457814685, guid: 76d5123f96702f94ead4997bdb0e4ec3,
     type: 3}
