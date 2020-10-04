@@ -157,24 +157,6 @@ public class PlayerScript : MonoBehaviour
                 }
                     
             }
-<<<<<<< HEAD
-                
-        }
-
-
-        // we can only jump whilst grounded
-        if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
-        {
-            _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-            _animator.SetBool("Jump", true);
-            _animator.ResetTrigger("Idle");
-            isJumping = true;
-        }
-        else
-        {
-            _animator.SetBool("Jump", false);
-        }
-=======
 
 
             // we can only jump whilst grounded
@@ -188,7 +170,6 @@ public class PlayerScript : MonoBehaviour
             {
                 _animator.SetBool("Jump", false);
             }
->>>>>>> b870cbccb266191707519539569ccee8f2cf3727
 
         // Immediately start falling if jump key is released early
         if( Input.GetKeyUp( KeyCode.UpArrow ) && isJumping )
@@ -198,27 +179,6 @@ public class PlayerScript : MonoBehaviour
         }
 
 
-<<<<<<< HEAD
-        // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
-        var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
-        _velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
-
-        // apply gravity before moving
-        _velocity.y += gravity * Time.deltaTime;
-
-        // if holding down bump up our movement amount and turn off one way platform detection for a frame.
-        // this lets us jump down through one way platforms
-        if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
-        {
-            _velocity.y *= 3f;
-            _controller.ignoreOneWayPlatformsThisFrame = true;
-        }
-
-        _controller.move( _velocity * Time.deltaTime );
-
-        // grab our current _velocity to use as a base for all calculations
-        _velocity = _controller.velocity;
-=======
             // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
             var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
             _velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
@@ -238,7 +198,6 @@ public class PlayerScript : MonoBehaviour
 
             // grab our current _velocity to use as a base for all calculations
             _velocity = _controller.velocity;
->>>>>>> b870cbccb266191707519539569ccee8f2cf3727
 
             if(Input.GetKeyUp( KeyCode.Z ))
             {
