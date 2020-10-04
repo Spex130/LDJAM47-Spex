@@ -7,7 +7,21 @@ public class Hitbox : MonoBehaviour
     public int damageValue = 1;
     public float timer = 1f;
     public float speed = 0;
-    public Vector3 direction;
+
+    private Rigidbody2D rb;
+    private Vector3 direction;
+    private HealthScript enemy;
+
+    // Called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+
+        if( rb != null )
+        {
+            rb.velocity = speed * direction;
+        }
+    }
 
     // Called once per frame
     void FixedUpdate()
@@ -24,6 +38,18 @@ public class Hitbox : MonoBehaviour
     void OnTriggerEnter2D( Collider2D otherCollider )
     {
         Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
+
+        // Grab the health script of the "enemy"
+        enemy = otherCollider.GetComponent<HealthScript>();
+
+        if( enemy != null )
+        {
+            // Call the enemy's damage method
+            enemy.TakeDamage( damageValue );
+        }
+
+        // Destroy the object after hitting a collider
+        Destroy( this.gameObject );
     }
 
     // Called when another collider exits the hitbox
@@ -32,7 +58,8 @@ public class Hitbox : MonoBehaviour
         Debug.Log( "onTriggerExitEvent: " + otherCollider.gameObject.name );
     }
 
-    public void setDirection( Vector3 newDirection )
+    // Sets the direction of the object
+    public void SetDirection( Vector3 newDirection )
     {
         direction = newDirection;
     }

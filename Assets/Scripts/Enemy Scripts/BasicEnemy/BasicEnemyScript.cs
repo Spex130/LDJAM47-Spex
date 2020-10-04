@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class BasicEnemyScript : MonoBehaviour
 {
+    public float timer;
+    private float timerOriginal;
 
-    public int Health;
+    [Tooltip("The Hitbox Prefab used to instantiate stuff.")]
+    public Hitbox enemyShootPrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        timerOriginal = timer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // If time has expired, attack
+        timer-= Time.deltaTime;
+        if( timer <= 0 )
+        {
+            Attack( enemyShootPrefab, 2, 0, 0 );
+            timer = timerOriginal;
+        }
     }
 
     void OnTriggerEnter2D( Collider2D col )
@@ -30,29 +39,15 @@ public class BasicEnemyScript : MonoBehaviour
 		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
 	}
 
-    public void TakeDamage()
+    public void Attack( Hitbox prefab, int damage, float xOffset, float yOffset )
     {
-        Health-=1;
-        DeathCheck();
+        Vector3 xOffsetVector = new Vector3( xOffset , 0, 0 );
+        Vector3 yOffsetVector = new Vector3( 0 , yOffset, 0 );
+        Vector3 spawnPos = this.transform.position + xOffsetVector + yOffsetVector;
+        
+        Hitbox hitbox = GameObject.Instantiate<Hitbox>( prefab, spawnPos, Quaternion.identity );
+        hitbox.SetDirection( Vector3.right );
     }
 
-    public void TakeDamage(int damage)
-    {
-        Health-=damage;
-        DeathCheck();
-    }
-
-    void DeathCheck()
-    {
-        if(Health <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void Die()
-    {
-        Destroy(this.gameObject);
-    }
-
+    
 }

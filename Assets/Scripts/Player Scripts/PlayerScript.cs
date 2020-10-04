@@ -15,9 +15,13 @@ public class PlayerScript : MonoBehaviour
 	public float inAirDamping = 5f;
 	public float jumpHeight = 10f;
     public float jumpRecoil = 100f;
-    public float detectDistance = 2f;
-    public int detectMask = 0;
+
+    // Flag for resetting jumps
     private bool isJumping = false;
+
+    public float detectDistance = 2f;
+    public LayerMask platformMask = 0;
+    
 
     [HideInInspector]
     private float normalizedHorizontalSpeed = 0;
@@ -27,8 +31,8 @@ public class PlayerScript : MonoBehaviour
 	public Animator _animator;
 
     [Tooltip("The Hitbox Prefab used to instantiate stuff.")]
-    public PlayerHitbox playerSlashPrefab;
-    public PlayerHitbox playerShootPrefab;
+    public Hitbox playerSlashPrefab;
+    public Hitbox playerShootPrefab;
 
     // Private Stuff
 	private RaycastHit2D _lastControllerColliderHit;
@@ -46,14 +50,14 @@ public class PlayerScript : MonoBehaviour
         _controller = GetComponent<CharacterController2D>();
 
         // Listens to some events for illustration purposes
-        _controller.onControllerCollidedEvent += onControllerCollider;
-        _controller.onTriggerEnterEvent += onTriggerEnterEvent;
-        _controller.onTriggerExitEvent += onTriggerExitEvent;
+        _controller.onControllerCollidedEvent += OnControllerCollider;
+        _controller.onTriggerEnterEvent += OnTriggerEnterEvent;
+        _controller.onTriggerExitEvent += OnTriggerExitEvent;
     }
 
     #region Event Listeners
 
-    void onControllerCollider( RaycastHit2D hit )
+    void OnControllerCollider( RaycastHit2D hit )
     {
         // bail out on plain old ground hits cause they arent very interesting
         if( hit.normal.y == 1f )
@@ -63,13 +67,13 @@ public class PlayerScript : MonoBehaviour
         // Debug.Log( "flags: " + _controller.collisionState + ", hit.normal: " + hit.normal );
     }
 
-    void onTriggerEnterEvent( Collider2D col )
+    void OnTriggerEnterEvent( Collider2D col )
     {
         Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
     }
 
 
-    void onTriggerExitEvent( Collider2D col )
+    void OnTriggerExitEvent( Collider2D col )
     {
         Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
     }
@@ -139,10 +143,10 @@ public class PlayerScript : MonoBehaviour
                 isJumping = true;
             }
             // Allows player to wall jump
-            else if( Physics2D.Raycast( transform.position + Vector3.up, getPlayerDirection(), detectDistance, 1 << detectMask ) && Input.GetKeyDown( KeyCode.UpArrow ) )
+            else if( Physics2D.Raycast( transform.position + Vector3.up, GetPlayerDirection(), detectDistance, platformMask ) && Input.GetKeyDown( KeyCode.UpArrow ) )
             {
-                // Debug.DrawRay(transform.position, getPlayerDirection() * detectDistance, Color.red);
-                _velocity.x = getPlayerDirection().x * -jumpRecoil;
+                // Debug.DrawRay(transform.position, GetPlayerDirection() * detectDistance, Color.red);
+                _velocity.x = GetPlayerDirection().x * -jumpRecoil;
 
                 _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
                 _animator.SetBool("Jump", true);
@@ -188,7 +192,7 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundSlash");
-                    attack(playerSlashPrefab, 2);
+                    Attack(playerSlashPrefab, 2);
                 }
             }
 
@@ -198,20 +202,20 @@ public class PlayerScript : MonoBehaviour
                 if(_controller.isGrounded)
                 {
                     _animator.SetTrigger("GroundShot");
-                    attack(playerShootPrefab, 2);
+                    Attack(playerShootPrefab, 2);
                 }
             }
         }
     }
 
     // Sets the player spawn flag
-    public void markPlayerSpawned()
+    public void MarkPlayerSpawned()
     {
         hasPlayerSpawned = true;
     }
 
     // Returns the direction of the player
-    public Vector3 getPlayerDirection()
+    public Vector3 GetPlayerDirection()
     {
         int xDir = transform.localScale.x > 0 ? 1 : -1;
 
@@ -219,19 +223,19 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Default constructor for attack
-    public void attack( PlayerHitbox prefab, int damage )
+    public void Attack( Hitbox prefab, int damage )
     {
-        attack( prefab, damage, 5, 4 );
+        Attack( prefab, damage, 5, 4 );
     }
 
     // Basic constructor for attack
-    public void attack( PlayerHitbox prefab, int damage, float xOffset, float yOffset )
+    public void Attack( Hitbox prefab, int damage, float xOffset, float yOffset )
     {
         Vector3 xOffsetVector = new Vector3( xOffset , 0, 0 );
         Vector3 yOffsetVector = new Vector3( 0 , yOffset, 0 );
-        Vector3 spawnPos = this.transform.position + ( getPlayerDirection().x * xOffsetVector ) + yOffsetVector;
+        Vector3 spawnPos = this.transform.position + ( GetPlayerDirection().x * xOffsetVector ) + yOffsetVector;
         
-        PlayerHitbox hitbox = GameObject.Instantiate<PlayerHitbox>( prefab, spawnPos, Quaternion.identity);
-        hitbox.setDirection( getPlayerDirection() );
+        Hitbox hitbox = GameObject.Instantiate<Hitbox>( prefab, spawnPos, Quaternion.identity );
+        hitbox.SetDirection( GetPlayerDirection() );
     }
 }

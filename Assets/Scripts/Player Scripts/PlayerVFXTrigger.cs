@@ -35,7 +35,7 @@ public class PlayerVFXTrigger : MonoBehaviour
 
     public void markPlayerSpawned()
     {
-        Player.markPlayerSpawned();
+        Player.MarkPlayerSpawned();
     }
     
 }
