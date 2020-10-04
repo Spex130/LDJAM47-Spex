@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BasicEnemyScript : MonoBehaviour
 {
+    public int damage = 2;
     public float timer;
     private float timerOriginal;
+    private HealthScript enemy;
 
     [Tooltip("The Hitbox Prefab used to instantiate stuff.")]
     public Hitbox enemyShootPrefab;
@@ -23,21 +25,30 @@ public class BasicEnemyScript : MonoBehaviour
         timer-= Time.deltaTime;
         if( timer <= 0 )
         {
-            Attack( enemyShootPrefab, 2, 0, 0 );
+            Attack( enemyShootPrefab, 2, 2, 0 );
             timer = timerOriginal;
         }
     }
 
-    void OnTriggerEnter2D( Collider2D col )
-	{
-		Debug.Log( "onTriggerEnterEvent: " + col.gameObject.name );
-	}
+    // Called when another collider enters the hitbox
+    void OnTriggerEnter2D( Collider2D otherCollider )
+    {
+        Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
 
+        // Grab the health script of the "enemy"
+        enemy = otherCollider.GetComponent<HealthScript>();
 
-	void OnTriggerExit2D( Collider2D col )
-	{
-		Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
-	}
+        if( enemy != null )
+        {
+            // Call the enemy's damage method
+            enemy.TakeDamage( damage, transform.position );
+        }
+    }
+
+    void OnTriggerExit2D( Collider2D col )
+    {
+        Debug.Log( "onTriggerExitEvent: " + col.gameObject.name );
+    }
 
     public void Attack( Hitbox prefab, int damage, float xOffset, float yOffset )
     {
@@ -48,6 +59,4 @@ public class BasicEnemyScript : MonoBehaviour
         Hitbox hitbox = GameObject.Instantiate<Hitbox>( prefab, spawnPos, Quaternion.identity );
         hitbox.SetDirection( Vector3.right );
     }
-
-    
 }
