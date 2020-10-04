@@ -37,10 +37,15 @@ public class PlayerScript : MonoBehaviour
     // Called when the object is instantiated
     void Awake()
     {
-        _animator = _animator == null ? _animator = _animator : _animator = GetComponentInChildren<Animator>();
+        // Makes sure that the PlayerObject has an attached Animator
+        if( _animator != null )
+        {
+            _animator = GetComponentInChildren<Animator>();
+        }
+
         _controller = GetComponent<CharacterController2D>();
 
-        // listen to some events for illustration purposes
+        // Listens to some events for illustration purposes
         _controller.onControllerCollidedEvent += onControllerCollider;
         _controller.onTriggerEnterEvent += onTriggerEnterEvent;
         _controller.onTriggerExitEvent += onTriggerExitEvent;
@@ -71,24 +76,10 @@ public class PlayerScript : MonoBehaviour
 
     #endregion
 
-    // Sets the player spawn flag
-    public void markPlayerSpawned()
-    {
-        hasPlayerSpawned = true;
-    }
-
-    // Returns the direction of the player
-    public Vector3 getPlayerDirection()
-    {
-        int xDir = transform.localScale.x > 0 ? 1 : -1;
-
-        return new Vector3( xDir, 0, 0 );
-    }
-
 	// Called every frame
-    // Contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+        // Contains a very simple example of moving the character around and controlling the animation
         if( hasPlayerSpawned )
         {
             AnimatorStateInfo animInfo = _animator.GetCurrentAnimatorStateInfo(0);
@@ -139,8 +130,6 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
-            // Debug.DrawRay(transform.position, getPlayerDirection() * detectDistance, Color.red);
-
             // Allows player jump on the ground
             if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
             {
@@ -152,7 +141,9 @@ public class PlayerScript : MonoBehaviour
             // Allows player to wall jump
             else if( Physics2D.Raycast( transform.position + Vector3.up, getPlayerDirection(), detectDistance, 1 << detectMask ) && Input.GetKeyDown( KeyCode.UpArrow ) )
             {
+                // Debug.DrawRay(transform.position, getPlayerDirection() * detectDistance, Color.red);
                 _velocity.x = getPlayerDirection().x * -jumpRecoil;
+
                 _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
                 _animator.SetBool("Jump", true);
                 _animator.ResetTrigger("Idle");
@@ -163,23 +154,23 @@ public class PlayerScript : MonoBehaviour
                 _animator.SetBool("Jump", false);
             }
 
-            // Immediately start falling if jump key is released early
+            // Starts falling if the jump key is released early
             if( Input.GetKeyUp( KeyCode.UpArrow ) && isJumping )
             {
                 _velocity.y = 0;
                 isJumping = false;
+                _animator.SetBool("Jump", false);
             }
 
-
-            // apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+            // Applies horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
             var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
             _velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
 
-            // apply gravity before moving
+            // Applies gravity before moving
             _velocity.y += gravity * Time.deltaTime;
 
-            // if holding down bump up our movement amount and turn off one way platform detection for a frame.
-            // this lets us jump down through one way platforms
+            // If holding 'Down', bumps up our movement amount and turn off one way platform detection for a frame
+            // This lets us jump down through one way platforms
             if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
             {
                 _velocity.y *= 3f;
@@ -188,9 +179,10 @@ public class PlayerScript : MonoBehaviour
 
             _controller.move( _velocity * Time.deltaTime );
 
-            // grab our current _velocity to use as a base for all calculations
+            // Grabs our current _velocity to use as a base for all calculations
             _velocity = _controller.velocity;
 
+            // Allows the player to melee attack
             if(Input.GetKeyUp( KeyCode.Z ))
             {
                 if(_controller.isGrounded)
@@ -200,6 +192,7 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
+            // Allows the player to ranged attack
             if(Input.GetKeyUp( KeyCode.X ))
             {
                 if(_controller.isGrounded)
@@ -209,6 +202,20 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Sets the player spawn flag
+    public void markPlayerSpawned()
+    {
+        hasPlayerSpawned = true;
+    }
+
+    // Returns the direction of the player
+    public Vector3 getPlayerDirection()
+    {
+        int xDir = transform.localScale.x > 0 ? 1 : -1;
+
+        return new Vector3( xDir, 0, 0 );
     }
 
     // Default constructor for attack

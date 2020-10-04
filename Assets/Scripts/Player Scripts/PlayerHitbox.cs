@@ -6,14 +6,18 @@ public class PlayerHitbox : Hitbox
 {
     public GameObject originObject;
 
+    private Rigidbody2D rb;
     private BasicEnemyScript enemy;
 
     // Called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
 
-        rigidbody.velocity = speed * direction;
+        if( rb != null )
+        {
+            rb.velocity = speed * direction;
+        }
     }
 
     // Called when another collider enters the hitbox

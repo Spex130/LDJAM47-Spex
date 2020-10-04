@@ -9,15 +9,6 @@ public class Hitbox : MonoBehaviour
     public float speed = 0;
     public Vector3 direction;
 
-    [HideInInspector]
-    public Rigidbody2D rigidbody;
-
-    // Called before the first frame update
-    void Start()
-    {
-        direction = Vector3.right;
-    }
-
     // Called once per frame
     void FixedUpdate()
     {
