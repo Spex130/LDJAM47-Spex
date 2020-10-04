@@ -83,6 +83,7 @@ public class PlayerScript : MonoBehaviour
 	// Called every frame
 	void Update()
 	{
+        _animator.SetBool("IsGrounded", _controller.isGrounded);
         // Contains a very simple example of moving the character around and controlling the animation
         if( hasPlayerSpawned )
         {
