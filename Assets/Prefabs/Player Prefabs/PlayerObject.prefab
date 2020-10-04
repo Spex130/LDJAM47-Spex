@@ -154,7 +154,7 @@ MonoBehaviour:
     m_Bits: 256
   triggerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 12288
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 512
@@ -235,7 +235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fbb8fec3f93f54f9791d43ddf53e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 100
+  kbEnabled: 1
+  kbHeight: 30
+  kbRecoil: 5
+  kbTimer: 0.5
 --- !u!1001 &3994091978111563269
 PrefabInstance:
   m_ObjectHideFlags: 0

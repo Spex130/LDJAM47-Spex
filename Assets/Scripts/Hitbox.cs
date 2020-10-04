@@ -37,7 +37,7 @@ public class Hitbox : MonoBehaviour
     // Called when another collider enters the hitbox
     void OnTriggerEnter2D( Collider2D otherCollider )
     {
-        Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
+        //Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
 
         // Grab the health script of the "enemy"
         enemy = otherCollider.GetComponent<HealthScript>();
@@ -45,7 +45,7 @@ public class Hitbox : MonoBehaviour
         if( enemy != null )
         {
             // Call the enemy's damage method
-            enemy.TakeDamage( damageValue );
+            enemy.TakeDamage( damageValue, transform.position );
         }
 
         // Destroy the object after hitting a collider

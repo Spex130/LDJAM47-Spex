@@ -21,7 +21,6 @@ public class PlayerScript : MonoBehaviour
 
     public float detectDistance = 2f;
     public LayerMask platformMask = 0;
-    
 
     [HideInInspector]
     private float normalizedHorizontalSpeed = 0;
