@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgValue: 1
   speed: 20
-  lifespan: 3
+  lifespan: 1
 --- !u!1 &1999922834420487545
 GameObject:
   m_ObjectHideFlags: 0

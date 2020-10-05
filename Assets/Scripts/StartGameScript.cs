@@ -17,8 +17,19 @@ public class StartGameScript : MonoBehaviour
         
     }
 
-    public void StartGme()
+    public void StartGame()
     {
         SceneManager.LoadScene("GenTestScene");
     }
+
+    public void LoadInstructions()
+    {
+        SceneManager.LoadScene("InstructionScreen");
+    }
+
+    public void LoadTitle()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
+
 }
