@@ -214,9 +214,6 @@ MonoBehaviour:
   inAirDamping: 20
   jumpHeight: 10
   jumpRecoil: 100
-  kbRecoil: 3
-  kbHeight: 5
-  kbDuration: 0.5
   detectDistance: 2
   platformMask:
     serializedVersion: 2
@@ -615,6 +612,11 @@ PrefabInstance:
       propertyPath: InitialModule.startRotation.minScalar
       value: -0.17453292
       objectReference: {fileID: 0}
+    - target: {fileID: 740255139194532802, guid: dde800c422f694548900e538328f3aca,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 740255139194532803, guid: dde800c422f694548900e538328f3aca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -846,6 +848,11 @@ PrefabInstance:
       propertyPath: RotationModule.curve.scalar
       value: 12.56637
       objectReference: {fileID: 0}
+    - target: {fileID: 740255139194532802, guid: dde800c422f694548900e538328f3aca,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 740255139194532803, guid: dde800c422f694548900e538328f3aca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -991,6 +998,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3944178030098519889, guid: 61372c367207ded4387ef5f6921d7cea,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3944178030098519891, guid: 61372c367207ded4387ef5f6921d7cea,
         type: 3}
