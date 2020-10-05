@@ -102,6 +102,7 @@ public class BasicEnemyScript : MonoBehaviour
         {
             // Call the enemy's damage method
             enemy.TakeDamage( damage, transform.position );
+            _animator.SetTrigger("Hurt");
         }
     }
 
@@ -117,6 +118,7 @@ public class BasicEnemyScript : MonoBehaviour
         {
             // Call the enemy's damage method
             enemy.TakeDamage( damage, transform.position );
+            _animator.SetTrigger("Hurt");
         }
     }
 

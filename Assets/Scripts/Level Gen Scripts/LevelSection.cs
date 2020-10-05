@@ -23,8 +23,6 @@ public class LevelSection : MonoBehaviour
     [Tooltip("The objects that can possibly be spawned at the spawn points")]
     public  BasicEnemyScript[] EnemyPool;
 
-    public BasicEnemyScript TestEnemy;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +44,23 @@ public class LevelSection : MonoBehaviour
                 if(Random.Range(0, 2) > 0)
                 {
                     GameObject spawnedObject = ObjectPool[Random.Range(0, ObjectPool.Length)];
-                GameObject.Instantiate<GameObject>(spawnedObject, ObjectSpawnPoints[i]);
+                    spawnedObject = GameObject.Instantiate<GameObject>(spawnedObject, ObjectSpawnPoints[i]);
+                    spawnedObject.transform.parent = null;
                 }
             }
             
+        }
+        for(int i = 0; i < EnemySpawnPoints.Length; i++)
+        {
+            if(EnemyPool.Length >= 1)
+            {
+                if(Random.Range(0, 2) > 0)
+                {
+                    BasicEnemyScript spawnedEnemy = EnemyPool[Random.Range(0, EnemyPool.Length)];
+                    spawnedEnemy = GameObject.Instantiate<BasicEnemyScript>(spawnedEnemy, EnemySpawnPoints[i]);
+                    spawnedEnemy.transform.parent = null;
+                }
+            }
         }
     }
 }

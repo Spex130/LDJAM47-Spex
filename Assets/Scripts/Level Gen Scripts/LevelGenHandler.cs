@@ -33,6 +33,9 @@ public class LevelGenHandler : MonoBehaviour
 
                 //Track new section;
                 CurrentLevelList[i] = newSection;
+
+                //Detach from parent
+                newSection.transform.parent = null;
             }
             else
             {
@@ -46,6 +49,9 @@ public class LevelGenHandler : MonoBehaviour
 
                 CurrentLevelList[i] = newSection;
                 newSection.InitializeSection();
+                
+                //Detach from parent
+                newSection.transform.parent = null;
             }
 
         }
