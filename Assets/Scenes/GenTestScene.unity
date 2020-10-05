@@ -183,6 +183,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7481733443173116164, guid: 7e835628950627049bf0667eedec7330,
+        type: 3}
+      propertyPath: platformMask.m_Bits
+      value: 16640
+      objectReference: {fileID: 0}
     - target: {fileID: 7481733443173116168, guid: 7e835628950627049bf0667eedec7330,
         type: 3}
       propertyPath: m_Name
@@ -206,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 7027377776160401003, guid: 330af76c73bc35d4d976042583318566,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.599983
+      value: -13.1
       objectReference: {fileID: 0}
     - target: {fileID: 7027377776160401003, guid: 330af76c73bc35d4d976042583318566,
         type: 3}
@@ -261,17 +266,17 @@ PrefabInstance:
     - target: {fileID: 7027377776160401003, guid: 330af76c73bc35d4d976042583318566,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 15.623993
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7027377776160401003, guid: 330af76c73bc35d4d976042583318566,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 15.623998
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7027377776160401003, guid: 330af76c73bc35d4d976042583318566,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 15.623998
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9085209558523794724, guid: 330af76c73bc35d4d976042583318566,
         type: 3}
@@ -591,10 +596,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceeb628b7324d694e9a0e69cd8c4308d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelChainLength: 2
-  CurrentSection: 0
+  LevelChainLength: 5
+  CurrentSection: 1
   LevelPrefabArray:
   - {fileID: 7191956273691717166, guid: 6d72300fafe3c96469d256f707db75c4, type: 3}
+  - {fileID: 7191956273691717166, guid: 09698cc3caa751145b80b883df4aa8c0, type: 3}
   LevelConnectorArray:
   - {fileID: 1889594955, guid: d9a21eff22c77e741ba0d9030c57b36d, type: 3}
   CurrentLevelList: []

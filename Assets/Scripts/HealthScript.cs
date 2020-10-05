@@ -61,4 +61,9 @@ public class HealthScript : MonoBehaviour
     {
         Destroy( this.gameObject );
     }
+
+    public int GetHealth()
+    {
+        return health;
+    }
 }

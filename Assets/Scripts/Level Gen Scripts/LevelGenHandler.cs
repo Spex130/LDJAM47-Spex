@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelGenHandler : MonoBehaviour
 {
     public int LevelChainLength = 1;
-    public int CurrentSection = 0;
+    public int CurrentSection = 1;
 
     public LevelSection[] LevelPrefabArray;
 

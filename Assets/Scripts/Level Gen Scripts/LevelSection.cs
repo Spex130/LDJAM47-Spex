@@ -43,9 +43,11 @@ public class LevelSection : MonoBehaviour
         {
             if(ObjectPool.Length >= 1)
             {
-                GameObject spawnedObject = ObjectPool[Random.Range(0, ObjectPool.Length)];
+                if(Random.Range(0, 2) > 0)
+                {
+                    GameObject spawnedObject = ObjectPool[Random.Range(0, ObjectPool.Length)];
                 GameObject.Instantiate<GameObject>(spawnedObject, ObjectSpawnPoints[i]);
-                print("Spawned!");
+                }
             }
             
         }
