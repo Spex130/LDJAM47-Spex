@@ -13,6 +13,11 @@ public class LevelSection : MonoBehaviour
 
     public LevelSectionTransition RightTransition;
 
+    public LevelBlock LeftLevelBlock;
+    public LevelBlock RightLevelBlock;
+    public bool completed;
+    public LevelGenHandler LevelHandler;
+
     public Transform[] ObjectSpawnPoints;
 
     [Tooltip("The objects that can possibly be spawned at the spawn points")]
@@ -32,7 +37,19 @@ public class LevelSection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(RightLevelBlock != null && completed == false)
+        {
+            if(RightLevelBlock.Health.GetHealth() <= 1 && completed == false)
+            {
+                completed = true;
+                LevelHandler.CurrentSection++;
+            }
+        }
+        else if(RightLevelBlock == null && completed == false)
+        {
+            completed = true;
+            LevelHandler.CurrentSection++;
+        }
     }
 
     public void InitializeSection()
@@ -45,7 +62,7 @@ public class LevelSection : MonoBehaviour
                 {
                     GameObject spawnedObject = ObjectPool[Random.Range(0, ObjectPool.Length)];
                     spawnedObject = GameObject.Instantiate<GameObject>(spawnedObject, ObjectSpawnPoints[i]);
-                    spawnedObject.transform.parent = null;
+                    //spawnedObject.transform.parent = null;
                 }
             }
             
@@ -58,7 +75,8 @@ public class LevelSection : MonoBehaviour
                 {
                     BasicEnemyScript spawnedEnemy = EnemyPool[Random.Range(0, EnemyPool.Length)];
                     spawnedEnemy = GameObject.Instantiate<BasicEnemyScript>(spawnedEnemy, EnemySpawnPoints[i]);
-                    spawnedEnemy.transform.parent = null;
+                    //spawnedEnemy.EnemyAI=(BasicEnemyScript.EnemyAiType)Random.Range(0,4);
+                    spawnedEnemy.transform.parent = this.transform;
                 }
             }
         }

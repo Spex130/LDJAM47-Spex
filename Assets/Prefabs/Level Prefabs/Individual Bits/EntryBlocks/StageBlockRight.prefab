@@ -116,6 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: {fileID: 6730865475383755965}
+  Anim: {fileID: 0}
+  isInvincible: 0
 --- !u!50 &2575627711320400538
 Rigidbody2D:
   serializedVersion: 4
@@ -149,8 +151,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fbb8fec3f93f54f9791d43ddf53e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 3
   invTimer: 0
+  DeathParticleSystem: {fileID: 8408442106070202123, guid: aa7c268bb79dc044cb19ae983ba9e567,
+    type: 3}
+  useParticleSystem: 0
 --- !u!1 &7971975714203941251
 GameObject:
   m_ObjectHideFlags: 0

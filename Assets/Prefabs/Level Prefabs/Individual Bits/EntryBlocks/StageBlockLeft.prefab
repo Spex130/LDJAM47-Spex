@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 27578027053742521}
   m_LocalRotation: {x: 0, y: 0.70710677, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0.00000047683716, z: 0}
-  m_LocalScale: {x: 14.999999, y: 7.4999995, z: 14.999999}
+  m_LocalScale: {x: 22.4226, y: 15, z: 30}
   m_Children:
   - {fileID: 3992525561074465635}
   m_Father: {fileID: 0}
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: {fileID: 0}
   Anim: {fileID: 0}
+  isInvincible: 0
 --- !u!50 &5734352129119224721
 Rigidbody2D:
   serializedVersion: 4
@@ -151,8 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fbb8fec3f93f54f9791d43ddf53e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 3
   invTimer: 0
+  DeathParticleSystem: {fileID: 8834347372769076968, guid: 58aa03d932110364baa47a498a506974,
+    type: 3}
+  useParticleSystem: 0
 --- !u!114 &2970457828933615376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: {fileID: 135331632206802843}
   Anim: {fileID: 0}
+  isInvincible: 0
 --- !u!1 &4368412569724179398
 GameObject:
   m_ObjectHideFlags: 0

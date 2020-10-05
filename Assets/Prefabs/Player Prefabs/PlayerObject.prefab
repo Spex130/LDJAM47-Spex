@@ -151,7 +151,7 @@ MonoBehaviour:
   _skinWidth: 0.02
   platformMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16640
   triggerMask:
     serializedVersion: 2
     m_Bits: 12288
@@ -212,7 +212,7 @@ MonoBehaviour:
   runSpeed: 20
   groundDamping: 100
   inAirDamping: 20
-  jumpHeight: 10
+  jumpHeight: 13
   jumpRecoil: 100
   detectDistance: 2
   platformMask:
@@ -223,6 +223,7 @@ MonoBehaviour:
     type: 3}
   playerShootPrefab: {fileID: -2176016844031608075, guid: f6bfb2bec7adcc041881df890e65802a,
     type: 3}
+  PlayerHealthScript: {fileID: 1159865705}
 --- !u!114 &1159865705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,8 +236,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fbb8fec3f93f54f9791d43ddf53e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 10
   invTimer: 2
+  DeathParticleSystem: {fileID: 8834347372769076968, guid: 58aa03d932110364baa47a498a506974,
+    type: 3}
+  useParticleSystem: 1
 --- !u!1001 &3994091978111563269
 PrefabInstance:
   m_ObjectHideFlags: 0

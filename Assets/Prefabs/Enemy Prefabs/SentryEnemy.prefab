@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2760494815197006732}
   - component: {fileID: 1176918145}
   m_Layer: 12
-  m_Name: Enemy
+  m_Name: SentryEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,8 +102,10 @@ MonoBehaviour:
   inAirDamping: 5
   jumpHeight: 3
   _animator: {fileID: 8585456011335241916}
-  timer: 3
   currentAnimFrame: 0
+  timer: 3
+  jumptimer: 0
+  EnemyAI: 0
   _controller: {fileID: 1176918145}
   ActionState: 0
   enemyShootPrefab: {fileID: -2176016844031608075, guid: 8cf641d0195be3e4ea86db7264b722ab,
@@ -120,8 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fbb8fec3f93f54f9791d43ddf53e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 3
   invTimer: 0
+  DeathParticleSystem: {fileID: 8834347372769076968, guid: 58aa03d932110364baa47a498a506974,
+    type: 3}
 --- !u!114 &1176918145
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,10 +16,17 @@ public class BasicEnemyScript : MonoBehaviour
 	private float normalizedHorizontalSpeed = 0;
 	public Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
+        public float currentAnimFrame;
     public float timer;
-    public float currentAnimFrame;
     private float timerOriginal;
+
+    public float jumptimer;
+    private float jumptimerOriginal;
+    bool useGravity = true;
     private HealthScript enemy;
+
+    public enum EnemyAiType {Sentry, Jumper, Floater, Bomber}
+    public EnemyAiType EnemyAI = EnemyAiType.Sentry;
 
     //Private Variables
     [SerializeField]
@@ -37,6 +44,7 @@ public class BasicEnemyScript : MonoBehaviour
     void Start()
     {
         timerOriginal = timer;
+        jumptimerOriginal = jumptimer;
         _animator = GetComponentInChildren<Animator>();
     }
 
@@ -52,7 +60,28 @@ public class BasicEnemyScript : MonoBehaviour
         AnimatorStateInfo animInfo = _animator.GetCurrentAnimatorStateInfo(0);
         currentAnimFrame = animInfo.normalizedTime % 1;
         _animator.SetFloat("CurrentAnimFrame", currentAnimFrame);
-        switch (ActionState)
+        switch(EnemyAI)
+        {   
+            case EnemyAiType.Sentry:
+                SentryUpdate();
+            break;
+            case EnemyAiType.Jumper:
+                JumperUpdate();
+            break;
+            case EnemyAiType.Floater:
+                JumperUpdate();
+            break;
+            default:
+                SentryUpdate();
+            break;
+        }
+
+    }
+
+    public void SentryUpdate()
+    {
+    useGravity = true;
+    switch (ActionState)
         {
             case EnemyState.Idle:
                 // Attack based on timer
@@ -80,20 +109,112 @@ public class BasicEnemyScript : MonoBehaviour
             break;
 
             case EnemyState.Hurting:
-
+                _animator.SetTrigger("Hurt");
+                ActionState = EnemyState.Idle;
             break;
 
             default:
 
             break;
         }
-
     }
+
+    public void JumperUpdate()
+    {
+    useGravity = true;
+    switch (ActionState)
+        {
+            case EnemyState.Idle:
+                // Attack based on timer
+                timer -= Time.deltaTime;
+                jumptimer -=Time.deltaTime;
+                if( timer <= 0 )
+                {
+                    timer = timerOriginal;
+                    _animator.SetTrigger("Fire");
+                    Attack( enemyShootPrefab, 2, 2, 0 );
+                    ActionState = EnemyState.Shooting;
+                    
+                }
+                if( jumptimer <= 0 )
+                {
+                    jumptimer = jumptimerOriginal;
+                    Jump();
+                    
+                }
+            break;
+
+            case EnemyState.Shooting:
+                
+                if( currentAnimFrame > .9f)
+                {
+                    ActionState = EnemyState.Idle;
+                }
+            break;
+
+            case EnemyState.Moving:
+
+            break;
+
+            case EnemyState.Hurting:
+                _animator.SetTrigger("Hurt");
+                ActionState = EnemyState.Idle;
+            break;
+
+            default:
+
+            break;
+        }
+    }
+
+
+    public void FloaterUpdate()
+    {
+    useGravity = false;
+    switch (ActionState)
+        {
+            case EnemyState.Idle:
+                // Attack based on timer
+                timer -= Time.deltaTime;
+                if( timer <= 0 )
+                {
+                    timer = timerOriginal;
+                    _animator.SetTrigger("Fire");
+                    Attack( enemyShootPrefab, 2, 2, 0 );
+                    ActionState = EnemyState.Shooting;
+                    
+                }
+            break;
+
+            case EnemyState.Shooting:
+                
+                if( currentAnimFrame > .9f)
+                {
+                    ActionState = EnemyState.Idle;
+                }
+            break;
+
+            case EnemyState.Moving:
+
+            break;
+
+            case EnemyState.Hurting:
+                _animator.SetTrigger("Hurt");
+                ActionState = EnemyState.Idle;
+            break;
+
+            default:
+
+            break;
+        }
+    }
+
+
 
     // Called when another collider enters the hitbox
     void OnTriggerEnter2D( Collider2D otherCollider )
     {
-        // Debug.Log( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
+        ActionState = EnemyState.Hurting;
 
         // Grab the health script of the "enemy"
         enemy = otherCollider.GetComponent<HealthScript>();
@@ -102,14 +223,14 @@ public class BasicEnemyScript : MonoBehaviour
         {
             // Call the enemy's damage method
             enemy.TakeDamage( damage, transform.position );
-            _animator.SetTrigger("Hurt");
+            
         }
     }
 
     // Called when another collider enters the hitbox
     void OnTriggerStay2D( Collider2D otherCollider )
     {
-        // Debug.Log( "onTriggerStayEvent: " + otherCollider.gameObject.name );
+        ActionState = EnemyState.Hurting;
 
         // Grab the health script of the "enemy"
         enemy = otherCollider.GetComponent<HealthScript>();
@@ -118,7 +239,7 @@ public class BasicEnemyScript : MonoBehaviour
         {
             // Call the enemy's damage method
             enemy.TakeDamage( damage, transform.position );
-            _animator.SetTrigger("Hurt");
+            
         }
     }
 
@@ -153,7 +274,9 @@ public class BasicEnemyScript : MonoBehaviour
     void PhysicsUpdateLogic()
 	{
 		if( _controller.isGrounded )
-			_velocity.y = 0;
+        {
+			//_velocity.y = 0;
+        }
 
     /*
 		if( Input.GetKey( KeyCode.RightArrow ) )
@@ -198,20 +321,26 @@ public class BasicEnemyScript : MonoBehaviour
 		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
 
 		// apply gravity before moving
-		_velocity.y += gravity * Time.deltaTime;
-
-		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
-		// this lets us jump down through one way platforms
-		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
-		{
-			_velocity.y *= 3f;
-			_controller.ignoreOneWayPlatformsThisFrame = true;
-		}
+        if(useGravity)
+        {
+           _velocity.y += gravity * Time.deltaTime; 
+        }
+        else
+        {
+            _velocity.y = 0;
+        }
+		
 
 		_controller.move( _velocity * Time.deltaTime );
 
 		// grab our current _velocity to use as a base for all calculations
 		_velocity = _controller.velocity;
 	}
+
+    public void Jump()
+    {
+        _velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
+        //_animator.Play( Animator.StringToHash( "Jump" ) );
+    }
 
 }

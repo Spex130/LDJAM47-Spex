@@ -37,6 +37,8 @@ public class PlayerScript : MonoBehaviour
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
 
+    public HealthScript PlayerHealthScript;
+
     // Called when the object is instantiated
     void Awake()
     {
@@ -82,6 +84,12 @@ public class PlayerScript : MonoBehaviour
 	// Called every frame
 	void Update()
 	{
+
+        if(PlayerHealthScript == null)
+        {
+            PlayerHealthScript = this.GetComponent<HealthScript>();
+        }
+
         _animator.SetBool("IsGrounded", _controller.isGrounded);
         // Contains a very simple example of moving the character around and controlling the animation
         if( hasPlayerSpawned )

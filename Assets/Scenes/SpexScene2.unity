@@ -1140,6 +1140,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7063522023693119352, guid: ed26bad733498104982f2806e42d789f,
+        type: 3}
+      propertyPath: EnemyAI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7063522023693119352, guid: ed26bad733498104982f2806e42d789f,
+        type: 3}
+      propertyPath: jumptimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7063522023693119352, guid: ed26bad733498104982f2806e42d789f,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7063522023693119352, guid: ed26bad733498104982f2806e42d789f,
+        type: 3}
+      propertyPath: gravity
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2760494815197006732, guid: ed26bad733498104982f2806e42d789f,
+        type: 3}
+      propertyPath: DeathParticleSystem
+      value: 
+      objectReference: {fileID: 8834347372769076968, guid: 58aa03d932110364baa47a498a506974,
+        type: 3}
     - target: {fileID: 2760494815197006734, guid: ed26bad733498104982f2806e42d789f,
         type: 3}
       propertyPath: m_Name

@@ -8,6 +8,9 @@ public class HealthScript : MonoBehaviour
     public int health = 10;
     public float invTimer = 0;
 
+    public ParticleSystem DeathParticleSystem;
+    public bool useParticleSystem = true;
+
     // Object private properties
     private PlayerScript player;
     private float timer = 0;
@@ -59,6 +62,8 @@ public class HealthScript : MonoBehaviour
     // Executes death function
     public void Die()
     {
+        if(useParticleSystem)
+            GameObject.Instantiate<ParticleSystem>(DeathParticleSystem,this.transform.position, Quaternion.identity);
         Destroy( this.gameObject );
     }
 

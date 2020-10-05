@@ -8,6 +8,8 @@ public class LevelBlock : MonoBehaviour
     public HealthScript Health;
     public Animator Anim;
 
+    public bool isInvincible = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,20 +25,24 @@ public class LevelBlock : MonoBehaviour
 
     void OnTriggerEnter2D( Collider2D otherCollider )
     {
-        print( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
+        //print( "onTriggerEnterEvent: " + otherCollider.gameObject.name );
 
-        Hitbox GotHitBox = otherCollider.GetComponent<Hitbox>();
-
-        if(GotHitBox != null)
+        if(isInvincible == false)
         {
-            Health.TakeDamage(1, GotHitBox.transform.position);
-            Anim.SetTrigger("TakeDamage");
+            Hitbox GotHitBox = otherCollider.GetComponent<Hitbox>();
+
+            if(GotHitBox != null)
+            {
+                Health.TakeDamage(1, GotHitBox.transform.position);
+                Anim.SetTrigger("TakeDamage");
+            }
+
+            if(Health.GetHealth() == 1)
+            {
+                Anim.SetTrigger("Dissolve");
+            }
         }
 
-        if(Health.GetHealth() == 1)
-        {
-            Anim.SetTrigger("Dissolve");
-        }
         
     }
 
