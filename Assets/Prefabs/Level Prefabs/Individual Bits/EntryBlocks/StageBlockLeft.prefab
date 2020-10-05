@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7567445666403267299}
   - component: {fileID: 7522852435466779830}
   - component: {fileID: 665974994880315758}
-  - component: {fileID: 4879513115976518917}
   - component: {fileID: 5734352129119224721}
   - component: {fileID: 135331632206802843}
   - component: {fileID: 2970457828933615376}
@@ -30,14 +29,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27578027053742521}
-  m_LocalRotation: {x: 0, y: 0.70710677, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -0, y: 0.00000047683716, z: 0}
   m_LocalScale: {x: 22.4226, y: 15, z: 30}
   m_Children:
   - {fileID: 3992525561074465635}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
 --- !u!33 &7567445666403267299
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -104,21 +103,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4879513115976518917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27578027053742521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd0981145fb889845aed5639a3581e2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: {fileID: 0}
-  Anim: {fileID: 0}
-  isInvincible: 0
 --- !u!50 &5734352129119224721
 Rigidbody2D:
   serializedVersion: 4

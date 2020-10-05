@@ -992,7 +992,7 @@ MonoBehaviour:
   LeftTransition: {fileID: 0}
   RightSidePosition: {fileID: 7191956273743093268}
   RightTransition: {fileID: 0}
-  LeftLevelBlock: {fileID: 313528639487542818}
+  LeftLevelBlock: {fileID: 7986936410054554679}
   RightLevelBlock: {fileID: 198446882505124026}
   completed: 0
   LevelHandler: {fileID: 0}
@@ -1311,9 +1311,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5183190109720333095}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &313528639487542818 stripped
+--- !u!114 &7986936410054554679 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4879513115976518917, guid: 840dbaa2c245546438b70c7ede8a7d62,
+  m_CorrespondingSourceObject: {fileID: 2970457828933615376, guid: 840dbaa2c245546438b70c7ede8a7d62,
     type: 3}
   m_PrefabInstance: {fileID: 5183190109720333095}
   m_PrefabAsset: {fileID: 0}

@@ -965,7 +965,7 @@ MonoBehaviour:
   RightSidePosition: {fileID: 7191956273743093268}
   RightTransition: {fileID: 0}
   LeftLevelBlock: {fileID: 2668760225512514824}
-  RightLevelBlock: {fileID: 8908197528382554533}
+  RightLevelBlock: {fileID: 1238184850012189616}
   completed: 0
   LevelHandler: {fileID: 0}
   ObjectSpawnPoints:
@@ -1486,9 +1486,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 840dbaa2c245546438b70c7ede8a7d62, type: 3}
---- !u!114 &8908197528382554533 stripped
+--- !u!114 &1238184850012189616 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4879513115976518917, guid: 840dbaa2c245546438b70c7ede8a7d62,
+  m_CorrespondingSourceObject: {fileID: 2970457828933615376, guid: 840dbaa2c245546438b70c7ede8a7d62,
     type: 3}
   m_PrefabInstance: {fileID: 4041915965487877280}
   m_PrefabAsset: {fileID: 0}

@@ -16,6 +16,8 @@ public class LevelGenHandler : MonoBehaviour
 
     public LevelSection[] LevelPrefabArray;
 
+    public LevelSection FinalLevel;
+
     public LevelSectionTransition[] LevelConnectorArray;
 
     public LevelSection[] CurrentLevelList = null;
@@ -36,12 +38,23 @@ public class LevelGenHandler : MonoBehaviour
     {
         if(LevelsGenerated)
         {
-            FogWall.transform.position = Vector3.Lerp(FogWall.transform.position, CurrentLevelList[CurrentSection].RightSidePosition.transform.position, .1f);
+            if(CurrentSection < CurrentLevelList.Length)
+            {
+                FogWall.transform.position = Vector3.Lerp(FogWall.transform.position, CurrentLevelList[CurrentSection].RightSidePosition.transform.position, .1f);
+            }
+            else
+            {
+                FogWall.transform.position = Vector3.Lerp(FogWall.transform.position, new Vector3(30000, 0, 0), .001f);
+            }
+            
         }
         else
         {
             FogWall.transform.position = Vector3.Lerp(FogWall.transform.position, this.transform.position + new Vector3 (10, 0, 0), .01f);
         }
+
+
+
         PlayerLoopLogic();
         LevelText.text = "Current Level: " + CurrentSection.ToString() + " / " + LevelChainLength.ToString();
         if(InstantiatedPlayer != null)
@@ -58,12 +71,13 @@ public class LevelGenHandler : MonoBehaviour
     {
         CurrentLevelList = new LevelSection[LevelChainLength];
         LevelSection previousSection = new LevelSection();
+        LevelSection newSection;
         for(int i = 0; i < LevelChainLength; i++)
         {
             if(i == 0)
             {
                 //Make a new section at origin.
-                LevelSection newSection = GameObject.Instantiate<LevelSection>(LevelPrefabArray[(int)Mathf.Floor(Random.Range(0, LevelPrefabArray.Length))], this.transform);
+                newSection = GameObject.Instantiate<LevelSection>(LevelPrefabArray[(int)Mathf.Floor(Random.Range(0, LevelPrefabArray.Length))], this.transform);
 
                 newSection.transform.position += new Vector3(-30, 0, 0);
 
@@ -82,7 +96,7 @@ public class LevelGenHandler : MonoBehaviour
             else
             {
                 //Make a new Section at the Right Transition of the Previous Section
-                LevelSection newSection = GameObject.Instantiate<LevelSection>(LevelPrefabArray[(int)Mathf.Floor(Random.Range(0, LevelPrefabArray.Length))], previousSection.RightTransition.RightSidePosition.transform);
+                newSection = GameObject.Instantiate<LevelSection>(LevelPrefabArray[(int)Mathf.Floor(Random.Range(0, LevelPrefabArray.Length))], previousSection.RightTransition.RightSidePosition.transform);
                 //Set the Left Transition of the New Section to the Right Transition of the Previous Section
                 newSection.LeftTransition = previousSection.RightTransition;
 
@@ -97,8 +111,24 @@ public class LevelGenHandler : MonoBehaviour
                 newSection.LevelHandler = this;
                 previousSection = newSection;
             }
-
         }
+
+
+            //FINAL STEP
+
+                //Make a new Section at the Right Transition of the Previous Section
+                newSection = GameObject.Instantiate<LevelSection>(FinalLevel, previousSection.RightTransition.RightSidePosition.transform);
+                //Set the Left Transition of the New Section to the Right Transition of the Previous Section
+                newSection.LeftTransition = previousSection.RightTransition;
+                
+
+                newSection.InitializeSection();
+
+                //Detach from parent
+                newSection.transform.parent = null;
+                newSection.LevelHandler = this;
+                previousSection = newSection;
+
         LevelsGenerated = true;
     }
 
@@ -108,7 +138,10 @@ public class LevelGenHandler : MonoBehaviour
         CurrentSection = 0;
         for(int i = 0; i < CurrentLevelList.Length; i++)
         {
-            Destroy(CurrentLevelList[i].gameObject);
+            if(CurrentLevelList[i] != null)
+            {
+                Destroy(CurrentLevelList[i].gameObject);
+            }
         }
         CurrentLevelList = null;
         FollowCamera.target = this.transform;
